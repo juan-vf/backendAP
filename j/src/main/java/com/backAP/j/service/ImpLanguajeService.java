@@ -4,9 +4,13 @@ import com.backAP.j.entity.Languaje;
 import com.backAP.j.interfaces.IntLanguajeService;
 import com.backAP.j.repository.IntLanguajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
+@Service
 public class ImpLanguajeService implements IntLanguajeService {
 
 

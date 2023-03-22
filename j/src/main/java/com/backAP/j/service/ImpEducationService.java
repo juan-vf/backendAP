@@ -4,9 +4,13 @@ import com.backAP.j.entity.Education;
 import com.backAP.j.interfaces.IntEducationService;
 import com.backAP.j.repository.IntEducationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
+@Service
 public class ImpEducationService implements IntEducationService {
 
     @Autowired

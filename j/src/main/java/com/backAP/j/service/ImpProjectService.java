@@ -4,9 +4,13 @@ import com.backAP.j.entity.Project;
 import com.backAP.j.interfaces.IntProjectService;
 import com.backAP.j.repository.IntProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
+@Service
 public class ImpProjectService implements IntProjectService {
 
 
