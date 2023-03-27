@@ -8,33 +8,49 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
-public class ImpEducationService implements IntEducationService {
+public class ImpEducationService{
 
     @Autowired
     public IntEducationRepository intEducationRepository ;
-    @Override
+
     public List<Education> getListEducation() {
         List<Education> eduList = intEducationRepository.findAll();
         return eduList;
     }
 
-    @Override
+
     public void saveEducation(Education education) {
         intEducationRepository.save(education);
     }
 
-    @Override
-    public void deleteEducationById(Integer id) {
+
+    public void deleteEducationById(int id) {
         intEducationRepository.deleteById(id);
     }
 
-    @Override
-    public Education findEducationById(Integer id) {
-        Education edu = intEducationRepository.findById(id).orElse(null);
-        return edu;
+
+    public Optional<Education> findEducationById(Integer id) {
+        return intEducationRepository.findById(id);
     }
+
+    public Optional<Education> getByTittle(String tittle) {
+        return intEducationRepository.findByTittle(tittle);
+    }
+
+    public Optional<Education> findByTittle(String tittle) {
+        return intEducationRepository.findByTittle(tittle);
+    }
+    public boolean exitsById(int id) {
+        return intEducationRepository.existsById(id);
+    }
+
+    public boolean exitsByTittle(String tittle) {
+        return intEducationRepository.existsByTittle(tittle);
+    }
+
 
 }

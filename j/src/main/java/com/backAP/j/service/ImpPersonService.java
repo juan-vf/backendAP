@@ -8,36 +8,43 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
-public class ImpPersonService implements IntPersonService {
+public class ImpPersonService{
 
     @Autowired
     public IntPersonRepository intPersonRepository;
 
 
-    @Override
     public List<Person> getListPerson() {
         List<Person> persons = intPersonRepository.findAll();
         return persons;
     }
 
-    @Override
     public void savePerson(Person person) {
         intPersonRepository.save(person);
     }
 
-    @Override
     public void deletePersonById(Integer id) {
         intPersonRepository.deleteById(id);
     }
 
-    @Override
-    public Person findPersonById(Integer id) {
-        Person person = intPersonRepository.findById(id).orElse(null);
-        return person;
+    public Optional<Person> findPersonById(Integer id) {
+        return intPersonRepository.findById(id);
     }
 
+    public boolean existsByName(String name){
+        return intPersonRepository.existsByName(name);
+    }
+
+    public boolean existsById(int id){
+        return intPersonRepository.existsById(id);
+    }
+
+    public Optional<Person> getByName(String name){
+        return intPersonRepository.findByName(name);
+    }
 
 }

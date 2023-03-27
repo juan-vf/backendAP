@@ -8,32 +8,43 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
-@Transactional
 @Service
-public class ImpExperienceService implements IntExperienceService{
+@Transactional
+public class ImpExperienceService{
 
     @Autowired
     private IntExperienceRepository intExperienceRepository;
 
-    @Override
+    //private IntExperienceRepository intExperienceRepository;
+
     public void saveExperience(Experience exp) {
         intExperienceRepository.save(exp);
     }
 
-    @Override
     public void deleteExperienceById(Integer id) {
         intExperienceRepository.deleteById(id);
     }
 
-    @Override
-    public Experience findExperienceById(Integer id) {
-        Experience exp = intExperienceRepository.findById(id).orElse(null);
-        return exp;
+    //@Override
+    public Optional<Experience> findExperienceById(Integer id) {
+        return intExperienceRepository.findById(id);
     }
 
-    @Override
-    public List<Experience> getListExperienceById() {
+    public Optional<Experience> getByPositionTitle(String positionTitle){
+        return intExperienceRepository.findByPositionTitle(positionTitle);
+    }
+
+    public boolean existsById(int id){
+        return intExperienceRepository.existsById(id);
+    }
+
+    public boolean existByPositionTitle(String positionTitle){
+        return intExperienceRepository.existsByPositionTitle(positionTitle);
+    }
+
+    public List<Experience> getListExperience() {
         List<Experience> expList = intExperienceRepository.findAll();
         return expList;
     }

@@ -11,7 +11,8 @@ import java.util.List;
 
 @RestController
 @Controller
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "https://frontendap-90374.web.app"})
 @RequestMapping("/skill")
 public class SkillController {
     @Autowired

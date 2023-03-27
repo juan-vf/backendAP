@@ -29,6 +29,14 @@ public class Experience {
         this.endActivityDate = endActivityDate;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getPositionTitle() {
         return positionTitle;
     }

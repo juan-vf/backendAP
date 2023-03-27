@@ -79,4 +79,12 @@ public class Project {
     public void setImagesProject(List<String> imagesProject) {
         this.imagesProject = imagesProject;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

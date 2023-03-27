@@ -24,7 +24,7 @@ public class MainUser implements UserDetails {
     private Collection <? extends GrantedAuthority> authorities;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     public static MainUser build(User user){

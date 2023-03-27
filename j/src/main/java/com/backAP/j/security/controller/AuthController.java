@@ -28,7 +28,8 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin//(origins = "http://localhost:4200")
+//@CrossOrigin//(origins = "http://localhost:4200/portfolio")
+@CrossOrigin(origins = {"http://localhost:4200", "https://frontendap-90374.web.app/"})
 public class AuthController {
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -63,8 +64,10 @@ public class AuthController {
         Set<Rol> roles = new HashSet<>();
         roles.add(rolService.getByRolName(RolName.ROLE_USER).get());
         if(newUser.getRoles().contains("admin")){
+            System.out.println(newUser.getRoles());
             roles.add(rolService.getByRolName(RolName.ROLE_ADMIN).get());
         }
+        System.out.println(user.getRoles());
         user.setRoles(roles);
         userService.save(user);
         return new ResponseEntity(new Mensaje("saved user"), HttpStatus.CREATED);
@@ -84,6 +87,7 @@ public class AuthController {
 
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
 
+        System.out.println();
         JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
 
         return new ResponseEntity(jwtDto, HttpStatus.OK);

@@ -36,6 +36,14 @@ public class Education {
         this.descriptionOptional = descriptionOptional;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getTittle() {
         return tittle;
     }

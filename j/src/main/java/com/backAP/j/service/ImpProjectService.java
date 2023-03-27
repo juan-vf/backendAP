@@ -8,35 +8,44 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
-public class ImpProjectService implements IntProjectService {
+public class ImpProjectService{
 
 
     @Autowired
     public IntProjectRepository intProjectRepository;
 
-    @Override
+
+
+
     public List<Project> getListProject() {
         List<Project> prjList = intProjectRepository.findAll();
         return prjList;
     }
 
-    @Override
     public void saveProject(Project project) {
         intProjectRepository.save(project);
     }
 
-    @Override
     public void deleteProjectById(Integer id) {
         intProjectRepository.deleteById(id);
     }
 
-    @Override
-    public Project findProjectById(Integer id) {
-        Project prj = intProjectRepository.findById(id).orElse(null);
-        return prj;
+    public Optional<Project> findProjectById(Integer id) {
+        return intProjectRepository.findById(id);
+    }
+    public Optional<Project> getByNameProject(String nameProject){
+        return intProjectRepository.findByNameProject(nameProject);
+    }
+    public boolean existsById(int id){
+        return intProjectRepository.existsById(id);
+    }
+
+    public boolean existByNameProject(String nameProject){
+        return intProjectRepository.existsByNameProject(nameProject);
     }
 
 }

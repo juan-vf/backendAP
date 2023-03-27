@@ -24,6 +24,14 @@ public class About {
         this.descriptionAbout = descriptionAbout;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getTittleAbout() {
         return tittleAbout;
     }
