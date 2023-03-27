@@ -18,7 +18,8 @@ import java.util.Optional;
 
 @RestController
 @Controller
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "https://frontendap-90374.web.app"})
 @RequestMapping("/experience")
 public class ExperienceController {
     //@Autowired
