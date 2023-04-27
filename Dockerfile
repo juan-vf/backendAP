@@ -1,10 +1,8 @@
-FROM adoptopenjdk/openjdk16:jdk-16.0.1_9-alpine-slim
+FROM openjdk:11-jre-slim-buster
 
-# Set the working directory
-RUN mkdir /app
-WORKDIR /app
-COPY target/j-0.0.1-SNAPSHOT.jar app.jar
+COPY target/j-0.0.1-SNAPSHOT.jar /usr/src/backendAP/
+
+WORKDIR /usr/src/backendAP
 
 EXPOSE 8080
-
-CMD ["java", "-jar", "target/j-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "j-0.0.1-SNAPSHOT.jar"]
