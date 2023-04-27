@@ -1,4 +1,4 @@
-FROM openjdk:latest
+FROM openjdk:19.0.1
 
 COPY target/j-0.0.1-SNAPSHOT.jar /usr/src/backendAP/
 
