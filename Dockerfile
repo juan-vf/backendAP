@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-slim-buster
+FROM adoptopenjdk/openjdk16:jdk-16.0.1_9-alpine-slim
 
 COPY target/j-0.0.1-SNAPSHOT.jar /usr/src/backendAP/
 
