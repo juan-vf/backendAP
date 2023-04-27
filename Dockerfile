@@ -1,4 +1,4 @@
-FROM amazoncorretto:8-alpine-jdk
+FROM openjdk:latest
 
 COPY target/j-0.0.1-SNAPSHOT.jar /usr/src/backendAP/
 
