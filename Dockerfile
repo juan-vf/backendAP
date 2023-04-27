@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk16:jdk-16.0.1_9-alpine-slim
+FROM amazoncorretto:8-alpine-jdk
 
 COPY target/j-0.0.1-SNAPSHOT.jar /usr/src/backendAP/
 
