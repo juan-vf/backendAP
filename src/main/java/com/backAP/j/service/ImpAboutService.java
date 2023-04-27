@@ -1,7 +1,6 @@
 package com.backAP.j.service;
 
 import com.backAP.j.entity.About;
-import com.backAP.j.entity.Experience;
 import com.backAP.j.interfaces.IntAboutService;
 import com.backAP.j.repository.IntAboutRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,6 @@ public class ImpAboutService{
 
     public Optional<About> findAboutById(Integer id) {
         return intAboutRepository.findById(id);
-
     }
     public boolean existsById(int id){
         return intAboutRepository.existsById(id);

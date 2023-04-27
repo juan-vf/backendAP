@@ -1,8 +1,13 @@
 package com.backAP.j.controller;
 
+import com.backAP.j.Dto.DtoSkill;
 import com.backAP.j.entity.Skill;
-import com.backAP.j.interfaces.IntSkillService;
+import com.backAP.j.security.entity.Mensaje;
+import com.backAP.j.service.ImpSkillService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.service.annotation.PutExchange;
@@ -15,49 +20,71 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:4200", "https://frontendap-90374.web.app"})
 @RequestMapping("/skill")
 public class SkillController {
+    //@Autowired
+    //public IntSkillService intSkillService;
     @Autowired
-    public IntSkillService intSkillService;
+    ImpSkillService impSkillService;
+
 
 
     @GetMapping("/get")
-    public List<Skill> getListSkill(){
-        List<Skill> sksList = intSkillService.getListSkill();
-        return sksList;
+    public ResponseEntity<List<Skill>> getListSkill(){
+        List<Skill> sksList = impSkillService.getListSkill();
+        return new ResponseEntity(sksList, HttpStatus.OK);
     }
 
     @PostMapping("/save")
-    public String saveSkill(@RequestBody Skill skill){
-        intSkillService.saveSkill(skill);
-        return "Skill data saved succesfully";
+    public ResponseEntity<?> saveSkill(@RequestBody DtoSkill dtoSkill){
+        if(StringUtils.isBlank(dtoSkill.getNameSkill())){
+            return new ResponseEntity<>(new Mensaje("the name is required"), HttpStatus.BAD_REQUEST);
+        }
+        if( impSkillService.existByNameSkill(dtoSkill.getNameSkill())){
+            return new ResponseEntity(new Mensaje("that name Skill already exist"), HttpStatus.BAD_REQUEST);
+        }
+        Skill skill = new Skill(dtoSkill.getNameSkill(), dtoSkill.getTypeSoft(), dtoSkill.getTypeHard(), dtoSkill.getSkillDomain());
+        impSkillService.saveSkill(skill);
+        return new ResponseEntity(new Mensaje("Skill data saved succesfully"), HttpStatus.OK) ;
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteSkillById(@PathVariable Integer id){
-        intSkillService.deleteSkillById(id);
-        return "Skill data deleted succesfully";
+    public ResponseEntity<?> deleteSkillById(@PathVariable("id") int id){
+        if(!impSkillService.existsById(id)){
+            new ResponseEntity(new Mensaje("Skill id not exist"), HttpStatus.BAD_REQUEST);
+        }
+        impSkillService.deleteSkillById(id);
+        return new ResponseEntity(new Mensaje("deleted Skill"), HttpStatus.OK);
     }
 
     @GetMapping("/getaSkill/{id}")
-    public Skill getSkillById(Integer id){
-        Skill sks = intSkillService.findSkillById(id);
-        return sks;
+    public ResponseEntity<Skill> getSkillById(@PathVariable("id") int id){
+        if(!impSkillService.existsById(id)){
+            new ResponseEntity(new Mensaje("Skill id not exist"), HttpStatus.BAD_REQUEST);
+        }
+        Skill sks = impSkillService.findSkillById(id).get();
+        return new ResponseEntity(sks, HttpStatus.OK);
     }
 
     //http://localhost:8080/skill/edit/1? PARA PEDIR CON ID 1
-    @PutExchange("/edit/{id}")
-    public Skill editSkillById(@PathVariable Integer id,
-                               @RequestParam("nameSkill") String newNameSkill,
-                               @RequestParam("typeSoft") Boolean newTypeSoft,
-                               @RequestParam("typeHard") Boolean newTypeHard,
-                               @RequestParam("skillDomain") Integer newSkillDomain){
-        Skill editSks = intSkillService.findSkillById(id);
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<?> editSkillById(@PathVariable("id") int id,
+                                           @RequestBody DtoSkill dtoSkill){
+        if(!impSkillService.existsById(id)){
+            new ResponseEntity(new Mensaje("Skill id not exist"), HttpStatus.BAD_REQUEST);
+        }
+        if(impSkillService.existByNameSkill(dtoSkill.getNameSkill()) && impSkillService.getByNameSkill(dtoSkill.getNameSkill()).get().getId() != id){
+            new ResponseEntity(new Mensaje("Skill already exist"), HttpStatus.BAD_REQUEST) ;
+        }
+        if(StringUtils.isBlank(dtoSkill.getNameSkill())){
+            new ResponseEntity(new Mensaje("skill name is required"), HttpStatus.BAD_REQUEST) ;
+        }
 
-        editSks.setNameSkill(newNameSkill);
-        editSks.setTypeHard(newTypeHard);
-        editSks.setTypeSoft(newTypeSoft);
-        editSks.setSkillDomain(newSkillDomain);
+        Skill editSks = impSkillService.findSkillById(id).get();
+        editSks.setNameSkill(dtoSkill.getNameSkill());
+        editSks.setSkillDomain(dtoSkill.getSkillDomain());
+        editSks.setTypeHard(dtoSkill.getTypeHard());
+        editSks.setTypeSoft(dtoSkill.getTypeSoft());
 
-        intSkillService.saveSkill(editSks);
-        return editSks;
+        impSkillService.saveSkill(editSks);
+        return new ResponseEntity(new Mensaje("updated and saved Skill"), HttpStatus.OK) ;
     }
 }

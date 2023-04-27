@@ -25,6 +25,14 @@ public class Skill {
         this.skillDomain = skillDomain;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getNameSkill() {
         return nameSkill;
     }

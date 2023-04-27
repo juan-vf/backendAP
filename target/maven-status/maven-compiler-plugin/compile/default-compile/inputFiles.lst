@@ -15,6 +15,7 @@ F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\entity\Skill.java
 F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\service\ImpSkillService.java
 F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\entity\Project.java
 F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\controller\AboutController.java
+F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\Dto\DtoSkill.java
 F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\security\enums\RolName.java
 F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\Dto\DtoEducation.java
 F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\service\ImpExperienceService.java
@@ -25,6 +26,7 @@ F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\interfaces\IntProjectService.jav
 F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\security\service\RolService.java
 F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\entity\Education.java
 F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\interfaces\IntExperienceService.java
+F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\Dto\DtoLanguaje.java
 F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\controller\LanguajeController.java
 F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\security\entity\Rol.java
 F:\H\AP_JDK.19\j (1)\src\main\java\com\backAP\j\security\jwt\JwtTokenFilter.java
